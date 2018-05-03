@@ -1,0 +1,6 @@
+---
+- hosts: all
+  roles:
+    - ansible-role-docker 
+    - ansible-role-pip
+    - ansible-role-container

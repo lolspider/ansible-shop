@@ -1,0 +1,8 @@
+---
+- name: pull spring.io/gs-spring-boot-docker image
+  docker_image:
+    name: springio/gs-spring-boot-docker
+
+
+
+    
