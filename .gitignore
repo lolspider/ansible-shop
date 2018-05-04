@@ -2,3 +2,4 @@
 *.retry
 prod/hosts
 stage/hosts
+plugins/
