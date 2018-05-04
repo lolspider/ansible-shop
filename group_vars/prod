@@ -2,4 +2,4 @@
 guest_port: 80
 host_port: 8080
 web_connection_retries: 5
-web_connection_delay: 60
+web_connection_delay: 12
