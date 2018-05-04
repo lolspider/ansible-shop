@@ -1,5 +1,5 @@
 ---
-- hosts: stage
+- hosts: all
   tasks:
     - name: pull spring.io/gs-spring-boot-docker image
       docker_image:
@@ -7,13 +7,8 @@
   
     - name: create a spring-boot container
       docker_container:
-        name: sprint-boot
+        name: spring-boot
         image: springio/gs-spring-boot-docker
         state: started
         ports:
-          - "8080:8080"
-          - "80:80"
-
-
-    
-
+          - "{{ guest_port }}:{{ host_port }}"

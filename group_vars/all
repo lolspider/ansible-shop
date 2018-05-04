@@ -1,0 +1,3 @@
+#def global var
+guest_port: 80
+host_port: 8080
