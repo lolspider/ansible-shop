@@ -1,4 +1,4 @@
-#def stage group var
+#def prod_spring_boot var
 guest_port: 80
 host_port: 8080
 web_connection_retries: 5
