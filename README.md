@@ -1,4 +1,4 @@
-ansible-shop
+ansible-shop  
 this project is defined to create sprint-boot-docker.
 ******
 ansible-version:2.5.2
