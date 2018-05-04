@@ -1,14 +1,23 @@
 ---
 - hosts: all
   tasks:
-    - name: pull spring.io/gs-spring-boot-docker image
+    - name: pull spring.io/gs-spring-boot-docker image.
       docker_image:
         name: springio/gs-spring-boot-docker
   
-    - name: create a spring-boot container
+    - name: create a spring-boot container.
       docker_container:
         name: spring-boot
         image: springio/gs-spring-boot-docker
         state: started
         ports:
           - "{{ guest_port }}:{{ host_port }}"
+
+    - name: check if web can be access.
+      shell: curl -D - --silent --max-time 5 http://{{ ansible_hostname}}:{{ guest_port }}
+      register: result
+      until: (result.stdout.find("Hello Docker World") != -1)
+      retries: "{{ web_connection_retries }}"
+      delay: "{{ web_connection_delay }}"
+      changed_when: false
+      check_mode: no
