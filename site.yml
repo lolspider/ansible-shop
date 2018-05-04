@@ -3,4 +3,5 @@
   roles:
     - ansible-role-docker 
     - ansible-role-pip
-    - ansible-role-container
+
+- include: spring-boot.yml
