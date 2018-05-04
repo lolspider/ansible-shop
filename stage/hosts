@@ -1,2 +1,2 @@
-[stage]
-192.168.34.110
+[stage_web]
+stage_srping_boot ansible_host=192.168.34.110
