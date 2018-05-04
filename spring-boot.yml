@@ -1,14 +1,14 @@
 ---
 - hosts: all
   tasks:
-    - name: Ensure denpendencies 
+    - name: Ensure denpendencies
       pip:
-        name: docker-py 
+        name: docker-py
 
     - name: pull spring.io/gs-spring-boot-docker image.
       docker_image:
         name: springio/gs-spring-boot-docker
-  
+
     - name: create a spring-boot container.
       docker_container:
         name: spring-boot
@@ -20,7 +20,6 @@
 #        log_options:
 #          syslog-address: tcp://{{ syslog_server }}:{{ syslog_port }}
 #          syslog-facility: daemon
-#          when: syslog_server is defined and syslog_port is defined
 #          tag: docker-log
 
     - name: check if web can be access.
