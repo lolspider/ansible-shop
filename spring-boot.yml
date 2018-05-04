@@ -1,16 +1,19 @@
 ---
-- name: pull spring.io/gs-spring-boot-docker image
-  docker_image:
-    name: springio/gs-spring-boot-docker
-
-- name: create a spring-boot container
-  docker_container:
-    name: sprint-boot
-    image: springio/gs-spring-boot-docker
-    state: started
-    ports:
-      - "8080:8080"
-      - "80:80"
+- hosts: stage
+  tasks:
+    - name: pull spring.io/gs-spring-boot-docker image
+      docker_image:
+        name: springio/gs-spring-boot-docker
+  
+    - name: create a spring-boot container
+      docker_container:
+        name: sprint-boot
+        image: springio/gs-spring-boot-docker
+        state: started
+        ports:
+          - "8080:8080"
+          - "80:80"
 
 
     
+

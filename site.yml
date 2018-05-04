@@ -4,4 +4,4 @@
     - ansible-role-docker 
     - ansible-role-pip
 
-- include: spring-boot.yml
+- import_playbook: spring-boot.yml
