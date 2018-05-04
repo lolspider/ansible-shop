@@ -24,8 +24,10 @@ Amount of time and number of times to wait when connecting to web after startup,
 ## How To Use  
 First  
    >git clone https://github.com/lolspider/ansible-shop.git  
+
 Then  
    >cd ansible-shop  
    >ansible-galaxy install -r requirements.yml --roles-path=./plugins  
+
 Finally  
    >run ansible-playbook in your way  
