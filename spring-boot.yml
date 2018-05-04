@@ -16,6 +16,12 @@
         state: started
         ports:
           - "{{ guest_port }}:{{ host_port }}"
+#        log_driver: syslog
+#        log_options:
+#          syslog-address: tcp://{{ syslog_server }}:{{ syslog_port }}
+#          syslog-facility: daemon
+#          when: syslog_server is defined and syslog_port is defined
+#          tag: docker-log
 
     - name: check if web can be access.
       shell: curl -D - --silent --max-time 5 http://{{ ansible_hostname}}:{{ guest_port }}

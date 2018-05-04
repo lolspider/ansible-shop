@@ -3,3 +3,5 @@ guest_port: 80
 host_port: 8080
 web_connection_retries: 5
 web_connection_delay: 10
+syslog_server: 192.168.34.112
+syslog_port: 514
