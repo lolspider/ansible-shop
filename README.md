@@ -5,7 +5,7 @@ ansible-version:2.5.2
 
 ******
 ### Variables  
-    group_vars/  
+    host_vars/  
 
 define guest's port you can access  
    >guest_port: 8080  
