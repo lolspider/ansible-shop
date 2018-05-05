@@ -27,7 +27,7 @@ First
 
 Then  
    >cd ansible-shop  
-   >ansible-galaxy install -r requirements.yml --roles-path=./plugins  
+   >make
 
 Finally  
    >run ansible-playbook in your way  
