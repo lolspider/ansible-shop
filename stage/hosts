@@ -1,2 +1,5 @@
+jenkins_server ansible_host=192.168.34.112
 [stage_web]
 stage_spring_boot ansible_host=192.168.34.110
+
+
