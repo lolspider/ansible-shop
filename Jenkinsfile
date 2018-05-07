@@ -1,5 +1,5 @@
 pipeline {
-    agent {label 'prod-01'}
+    agent {label 'stage-01'}
     environment {
         CHECK_URL = "http://localhost"
         CMD = "curl --write-out %{http_code} --silent --output /dev/null ${CHECK_URL}"
@@ -14,7 +14,7 @@ pipeline {
             steps {
                 sh 'docker pull springio/gs-spring-boot-docker'
                 sh 'docker run -d -p 80:8080 springio/gs-spring-boot-docker'
-                
+
             }
         }
         stage('Check-Stage-One') {
