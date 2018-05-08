@@ -1,13 +1,9 @@
 ---
 - hosts: all
   tasks:
-    - name: Ensure denpendencies
-      pip:
-        name: docker-py
-
-    - name: pull spring.io/gs-spring-boot-docker image.
-      docker_image:
-        name: springio/gs-spring-boot-docker
+#    - name: pull spring.io/gs-spring-boot-docker image.
+#      docker_image:
+#        name: springio/gs-spring-boot-docker
 
     - name: create a spring-boot container.
       docker_container:
@@ -16,17 +12,22 @@
         state: started
         ports:
           - "{{ guest_port }}:{{ host_port }}"
-#        log_driver: syslog
-#        log_options:
-#          syslog-address: tcp://{{ syslog_server }}:{{ syslog_port }}
-#          syslog-facility: daemon
-#          tag: docker-log
 
-    - name: check if web can be access.
-      shell: curl -D - --silent --max-time 5 http://{{ ansible_hostname}}:{{ guest_port }}
+#    - name: check if web can be access
+#      shell: curl -D - --silent --max-time 5 http://{{ ansible_hostname}}:{{ guest_port }}
+#      register: result
+#      until: (result.stdout.find("Hello Docker World") != -1)
+#      retries: "{{ web_connection_retries }}"
+#      delay: "{{ web_connection_delay }}"
+#      changed_when: false
+#      check_mode: no
+
+    - name: check if web can be access 
+      uri:
+        url: http://{{ ansible_hostname}}:{{ guest_port }}
       register: result
-      until: (result.stdout.find("Hello Docker World") != -1)
+      until: (result.status == 200)
       retries: "{{ web_connection_retries }}"
       delay: "{{ web_connection_delay }}"
-      changed_when: false
-      check_mode: no
+#      changed_when: false
+#      check_mode: no

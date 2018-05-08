@@ -3,5 +3,8 @@
   roles:
     - geerlingguy.docker
     - geerlingguy.pip
-
+  tasks:
+    - name: Ensure denpendencies
+      pip:
+        name: docker-py
 - import_playbook: spring-boot.yml
