@@ -10,7 +10,7 @@ pipeline {
             steps {
                 script {
                     sh 'make'
-                    sh 'ansible-playbook -i stage/hosts -u vagrant -b $playbook'
+                    sh 'ansible-playbook -i $inventory -u vagrant -b $playbook'
                 }
             }
         }  
