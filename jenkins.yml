@@ -10,7 +10,7 @@
 - hosts: jenkins_server
   roles:
     - role: geerlingguy.java
-      when: "ansible_os_family == 'Debian'"
-      java_packages: openjdk-8-jdk
+      vars:
+        java_packages: openjdk-8-jdk
     - role: geerlingguy.jenkins
   become: true
