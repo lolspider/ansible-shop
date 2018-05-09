@@ -1,43 +1,18 @@
 pipeline {
-    agent {label 'stage-01'}
-    environment {
-        CHECK_URL = "http://localhost"
-        CMD = "curl --write-out %{http_code} --silent --output /dev/null ${CHECK_URL}"
-    }
+    agent any
     stages {
-        stage("Fix the permission issue") {
+        stage("git") {
             steps {
-                sh "sudo chown root:vagrant /run/docker.sock"
-            }
+                git (credentialsId: '5fbf29ca-18b1-462c-87c8-ec8f88a4788e', url: 'https://github.com/lolspider/ansible-shop.git')
+            }        
         }
-        stage("pull image") {
-            steps {
-                sh 'docker pull springio/gs-spring-boot-docker'
-                sh 'docker run -d -p 80:8080 springio/gs-spring-boot-docker'
-
-            }
-        }
-        stage('Check-Stage-One') {
-            steps {
-                script{
-                    sh "sleep 10"
-                    sh "$CMD > commandResult"
-                    env.status = readFile('commandResult').trim()
-                }
-            }
-        }
-        stage('Check-Stage-Two') {
+        stage("ansible-playbook") {
             steps {
                 script {
-                    sh "echo ${env.status}"
-                    if (env.status == '200') {
-                        currentBuild.result = "SUCCESS"
-                    }
-                    else {
-                        currentBuild.result = "FAILURE"
-                    }
+                    sh 'make'
+                    sh 'ansible-playbook -i stage/hosts -u vagrant -b $playbook'
                 }
             }
-        }
+        }  
     }
 }
