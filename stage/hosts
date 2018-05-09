@@ -1,4 +1,4 @@
 [stage_web]
-stage_spring_boot ansible_host=192.168.34.110
+spring_boot ansible_host=192.168.34.110
 
 

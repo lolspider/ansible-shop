@@ -1,2 +1,2 @@
 [prod_web]
-prod_spring_boot ansible_host=192.168.35.110
+spring_boot ansible_host=192.168.35.110
