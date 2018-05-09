@@ -1,3 +1,4 @@
 #ansible
 *.retry
 plugins/
+*.swp
