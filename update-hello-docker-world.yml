@@ -1,0 +1,7 @@
+---
+- host: all
+  tasks:
+    - name: pull docker image
+      docker_contaner:
+        - name: lolspider/hello-docker-world:{{ tagversion }}
+        - state: started

@@ -4,3 +4,4 @@ host_port: 8080
 web_connection_retries: 5
 web_connection_delay: 10
 spring_boot_version: latest
+tagversion: latest
