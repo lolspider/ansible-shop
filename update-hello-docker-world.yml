@@ -3,5 +3,8 @@
   tasks:
     - name: pull docker image
       docker_container:
-        name: lolspider/hello-docker-world:{{ tagversion }}
+        name: hello-docker-world
+        image: lolspider/hello-docker-world:{{ tagversion }}
         state: started
+        ports:
+          - "{{ guest_port }}:{{ host_port }}"
