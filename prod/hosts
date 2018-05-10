@@ -1,2 +1,2 @@
 [prod_web]
-spring_boot ansible_host=192.168.35.110
+spring_boot ansible_host=192.168.35.110 ansible_ssh_private_key_file=ssh_keys/192.168.35.110.key
