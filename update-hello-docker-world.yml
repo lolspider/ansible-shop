@@ -1,5 +1,5 @@
 ---
-- host: all
+- hosts: all
   tasks:
     - name: pull docker image
       docker_contaner:
