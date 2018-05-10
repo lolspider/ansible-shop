@@ -1,0 +1,12 @@
+pipeline {
+    agent any
+    stages {
+        stage("ansible-playbook") {
+            steps {
+                script {
+                    sh 'ansible-playbook -i $inventory --extra-vars "tagversion=$tagversion" -u vagrant -b $playbook'
+                }
+            }
+        }
+    }
+}
