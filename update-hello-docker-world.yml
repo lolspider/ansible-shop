@@ -3,5 +3,5 @@
   tasks:
     - name: pull docker image
       docker_contaner:
-        - name: lolspider/hello-docker-world:{{ tagversion }}
-        - state: started
+        name: lolspider/hello-docker-world:{{ tagversion }}
+        state: started
