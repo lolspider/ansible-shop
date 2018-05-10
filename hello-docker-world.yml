@@ -3,8 +3,8 @@
   tasks:
     - name: git clone and gradle.
       git:
-      repo: https://github.com/lolspider/hello-docker-world.git
-      dest: /svr/checkout/
+        repo: https://github.com/lolspider/hello-docker-world.git
+        dest: /svr/checkout/
 
     - name: create docker image
       shell: ./gradlew build docker
