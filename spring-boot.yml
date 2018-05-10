@@ -18,4 +18,3 @@
       retries: "{{ web_connection_retries }}"
       delay: "{{ web_connection_delay }}"
       changed_when: false
-      check_mode: no
