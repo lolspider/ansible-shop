@@ -5,6 +5,7 @@ pipeline {
             steps {
                 script {
                     sh 'make'
+		    sh 'sudo chmod 600 ssh_keys/*'
                     sh 'ansible-playbook -i $inventory --extra-vars "spring_boot_version=$spring_boot_version" -u vagrant -b $playbook'
                 }
             }
