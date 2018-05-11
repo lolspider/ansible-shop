@@ -4,7 +4,7 @@ pipeline {
         stage("install docker or jdk") {
             steps {
                 script {
-                    sh 'ansible-playbook -i $inventory --extra-vars "is_docker=$is_docker is_jdk=$is_jdk jdk-version=${jdk-version}" -u vagrant -b environment.yml'
+                    sh 'ansible-playbook -i $inventory --extra-vars '{"is_docker":"$is_docker","is_jdk":"$is_jdk","jdk-version":"${jdk-version}"}' -u vagrant -b environment.yml'
                 }
             }
         }
