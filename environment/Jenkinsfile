@@ -6,7 +6,7 @@ pipeline {
                 script {
                 sh 'make'
                 sh 'sudo chmod 600 ssh_keys/*'
-                sh 'ansible-playbook -i $inventory --extra-vars \'{"is_docker":'$is_docker',"is_jdk":'$is_jdk',"java_packages":'$java_packages'}\' -u vagrant -b environment.yml'
+                sh 'ansible-playbook -i $inventory --extra-vars \'{"is_docker":"${is_docker}","is_jdk":"${is_jdk}","java_packages":"${java_packages}"}\' -u vagrant -b environment.yml'
                 }
             }
         }
