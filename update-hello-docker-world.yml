@@ -8,3 +8,10 @@
         state: started
         ports:
           - "{{ guest_port }}:{{ host_port }}"
+    - name: check if web can be access
+      uri:
+        url: http://{{ ansible_hostname}}:{{ guest_port }}
+      register: result
+      until: (result.status == 200)
+      retries: "{{ web_connection_retries }}"
+      delay: "{{ web_connection_delay }}"

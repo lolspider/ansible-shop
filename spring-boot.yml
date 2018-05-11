@@ -17,4 +17,3 @@
       until: (result.status == 200)
       retries: "{{ web_connection_retries }}"
       delay: "{{ web_connection_delay }}"
-      changed_when: false
