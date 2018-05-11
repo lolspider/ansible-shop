@@ -4,8 +4,8 @@ pipeline {
         stage("deploy and check") {
             steps {
                 script {
- 		    sh 'sudo chmod 600 ssh_keys/*'
-                    sh 'ansible-playbook -i $inventory --extra-vars "tagversion=$tagversion" -u vagrant -b $playbook'
+ 		                sh 'sudo chmod 600 ssh_keys/*'
+                    sh 'ansible-playbook -i $inventory --extra-vars "tagversion=$tagversion" -u vagrant -b hello-docker-world/$playbook'
                 }
             }
         }
