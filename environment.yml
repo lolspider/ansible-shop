@@ -1,0 +1,27 @@
+---
+- hosts: all
+  roles:
+    - role: geerlingguy.docker
+      when: is_docker == "true"
+    - role: geerlingguy.pip
+      when: is_docker == "true"
+    - role: geerlingguy.java
+      vars:
+        java_packages: "{{ jdk-version }}"
+      when: is_jdk == "true"
+
+  tasks:
+    - name: Ensure denpendencies
+      pip:
+        name: docker-py
+      when: is_docker == "true"
+
+  pre_tasks:
+    - name: installing repo for Java 8 in Ubuntu
+      apt_repository: repo='ppa:openjdk-r/ppa'
+      when: is_docker == "true"
+
+    - name: apt-get update
+      apt:
+        update_cache: yes
+      when: is_docker == "true"

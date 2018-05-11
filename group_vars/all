@@ -5,3 +5,6 @@ web_connection_retries: 5
 web_connection_delay: 10
 spring_boot_version: latest
 tagversion: latest
+is_docker: true
+is_jdk: false
+jdk-version: openjdk-8-jdk
