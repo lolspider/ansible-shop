@@ -4,6 +4,7 @@ pipeline {
         stage("ansible-playbook") {
             steps {
                 script {
+ 		    sh 'sudo chmod 600 ssh_keys/*'
                     sh 'ansible-playbook -i $inventory --extra-vars "tagversion=$tagversion" -u vagrant -b $playbook'
                 }
             }
