@@ -1,7 +1,7 @@
 pipeline {
     agent any
     stages {
-        stage("ansible-playbook") {
+        stage("deploy and check") {
             steps {
                 script {
  		    sh 'sudo chmod 600 ssh_keys/*'
