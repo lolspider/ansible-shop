@@ -5,7 +5,7 @@ pipeline {
             steps {
                 script {
  		                sh 'sudo chmod 600 ssh_keys/*'
-                    sh 'git-crypt --unlock /var/lib/jenkins/gpgkey'
+                    sh 'git-crypt unlock /var/lib/jenkins/gpgkey'
                     sh 'ansible-playbook -i $inventory --extra-vars "tagversion=$tagversion" -u vagrant -b $playbook'
                 }
             }
