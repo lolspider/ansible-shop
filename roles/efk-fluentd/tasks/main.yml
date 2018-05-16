@@ -1,0 +1,30 @@
+---
+
+- name: Include variables
+  include_vars: Debian.yml
+
+- include_tasks: setup-elastic-repo.yml
+  when: is_es == "true" or is_kibana == "true"
+
+- name: Installing from the APT repository(install Elasticsearch)
+  apt:
+    name: elasticsearch
+    state: present
+    update_cache: yes
+  environment:
+    RUNLEVEL: 1
+  when: is_es == "true"
+
+- name: Installing from the APT repository(install Kibana)
+  apt:
+    name: kibana
+    state: present
+    update_cache: yes
+  environment:
+    RUNLEVEL: 1
+  when: is_kibana == "true"
+
+- name: Installing Fluentd
+  shell: curl -L https://toolbelt.treasuredata.com/sh/install-ubuntu-trusty-td-agent3.sh | sh
+  when: is_fluentd == "true"
+

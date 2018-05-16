@@ -8,3 +8,4 @@ tagversion: latest
 is_docker: true
 is_jdk: false
 jdk-version: openjdk-8-jdk
+java_packages: openjdk-8-jdk

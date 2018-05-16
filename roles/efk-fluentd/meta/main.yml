@@ -1,0 +1,12 @@
+---
+#dependencies:
+##  - geerlingguy.java
+#
+#roles_info:
+#  packages:
+#    - name: elasticsearch && kibana
+#      platforms:
+#        - name: Debian
+#    - name: fluentd
+#      platforms:
+#        - name: Ubuntu Trusty
