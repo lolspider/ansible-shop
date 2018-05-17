@@ -1,3 +1,6 @@
-##define fluentd config
+##config fluentd
 dockertag: prod**
 fluentd_server: 192.168.35.115
+
+#args for starting docker container(docker tag)
+docker_tagenv: prod

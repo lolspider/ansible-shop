@@ -1,16 +1,21 @@
 ---
 - hosts: all
   tasks:
-    - name: pull docker image
+    - name: pull image
       docker_container:
         name: hello-docker-world
         image: lolspider/hello-docker-world:{{ tagversion }}
-        state: started
+        log_driver: fluentd
+        log_options:
+          fluentd-address: localhost:24224
+          tag: "{{ docker_tagenv }}:hello-docker-world"
         ports:
           - "{{ guest_port }}:{{ host_port }}"
+        state: started
+
     - name: check if web can be access
       uri:
-        url: http://{{ ansible_hostname}}:{{ guest_port }}
+        url: http://{{ ansible_hostname }}:{{ guest_port }}
       register: result
       until: (result.status == 200)
       retries: "{{ web_connection_retries }}"

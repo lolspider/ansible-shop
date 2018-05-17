@@ -12,7 +12,7 @@
 
     - name: check if web can be access
       uri:
-        url: http://{{ ansible_hostname}}:{{ guest_port }}
+        url: http://{{ ansible_hostname }}:{{ guest_port }}
       register: result
       until: (result.status == 200)
       retries: "{{ web_connection_retries }}"
