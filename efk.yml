@@ -5,7 +5,7 @@
       vars:
         java_packages: openjdk-8-jdk
       when: is_es == "true"
-    - efk-fluentd
+    - role: efk-fluentd
 
   pre_tasks:
     - name: installing repo for Java 8 in Ubuntu
