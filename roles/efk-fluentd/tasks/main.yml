@@ -20,6 +20,15 @@
     update_cache: yes
   when: is_kibana == "true"
 
+- name: check if kibana can be access
+    uri:
+      url: http://{{ ansible_hostname }}:5601
+    register: result
+    until: (result.status == 200)
+    retries: "{{ web_connection_retries }}"
+    delay: "{{ web_connection_delay }}"
+    when: is_kibana == "true"
+
 - name: Installing Fluentd
   shell: curl -L https://toolbelt.treasuredata.com/sh/install-ubuntu-trusty-td-agent3.sh | sh
   when: is_fluentd == "true" or is_fluentd_server == "true"
@@ -40,3 +49,4 @@
     name: td-agent
     state: started
   when: is_fluentd == "true" or is_fluentd_server == "true"
+
