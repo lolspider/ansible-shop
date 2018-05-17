@@ -1,0 +1,23 @@
+<source>
+  @type forward
+  @label @TEST
+  port 24224
+  bind 0.0.0.0
+</source>
+
+
+<label @TEST>
+  <filter>
+    @type record_transformer
+    <record>
+      tag ${tag}
+      timestamp ${time}
+    </record>
+  </filter>
+  <match {{ dockertag }}>
+    @type forward
+    <server>
+      host {{ fluentd_server }}
+    </server>
+  </match>
+</label>

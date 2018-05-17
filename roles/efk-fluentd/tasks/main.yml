@@ -11,8 +11,6 @@
     name: elasticsearch
     state: present
     update_cache: yes
-  environment:
-    RUNLEVEL: 1
   when: is_es == "true"
 
 - name: Installing from the APT repository(install Kibana)
@@ -20,11 +18,16 @@
     name: kibana
     state: present
     update_cache: yes
-  environment:
-    RUNLEVEL: 1
   when: is_kibana == "true"
 
 - name: Installing Fluentd
   shell: curl -L https://toolbelt.treasuredata.com/sh/install-ubuntu-trusty-td-agent3.sh | sh
   when: is_fluentd == "true"
 
+- include_tasks: config-fluentd.yml 
+  when: is_fluentd == "true"
+
+- name: Ensure Fluentd is started
+  service: 
+    name: td-agent
+    state: started

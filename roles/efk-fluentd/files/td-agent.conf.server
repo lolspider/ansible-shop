@@ -1,0 +1,21 @@
+<source>
+  @type forward
+  port 24224
+  bind 0.0.0.0
+</source>
+
+<match prod:**>
+  @type elasticsearch
+  host localhost
+  port 9200
+  index_name prod-hello-docker-world
+  type_name fluentd
+</match>
+
+<match staging:**>
+  @type elasticsearch
+  host localhost
+  port 9200
+  index_name staging-hello-docker-world
+  type_name fluentd
+</match>
