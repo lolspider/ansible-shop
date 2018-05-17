@@ -22,12 +22,21 @@
 
 - name: Installing Fluentd
   shell: curl -L https://toolbelt.treasuredata.com/sh/install-ubuntu-trusty-td-agent3.sh | sh
-  when: is_fluentd == "true"
+  when: is_fluentd == "true" or is_fluentd_server == "true"
 
 - include_tasks: config-fluentd.yml 
   when: is_fluentd == "true"
+
+- name: copy configuration to fluentd_server
+  copy:
+    src: td-agent.conf.server
+    dest: /etc/td-agent/td-agent.conf
+    owner: vagrant
+    mode: 0644
+  when: is_fluentd_server == "true"
 
 - name: Ensure Fluentd is started
   service: 
     name: td-agent
     state: started
+  when: is_fluentd == "true" or is_fluentd_server == "true"
