@@ -4,37 +4,38 @@
   include_vars: Debian.yml
 
 - include_tasks: setup-elastic-repo.yml
-  when: is_es == "true" or is_kibana == "true"
 
 - name: Installing from the APT repository(install Elasticsearch)
   apt:
     name: elasticsearch
     state: present
     update_cache: yes
-  when: is_es == "true"
+
+- name: Check if port 9200 is listening
+  wait_for:
+    port: 9200
+    delay: 5
+    timeout: 50
+    msg: "Timeout waiting for 9200 to respond"
 
 - name: Installing from the APT repository(install Kibana)
   apt:
     name: kibana
     state: present
     update_cache: yes
-  when: is_kibana == "true"
 
 - name: check if kibana can be access
-    uri:
-      url: http://{{ ansible_hostname }}:5601
-    register: result
-    until: (result.status == 200)
-    retries: "{{ web_connection_retries }}"
-    delay: "{{ web_connection_delay }}"
-    when: is_kibana == "true"
+  uri:
+    url: http://{{ ansible_hostname }}:5601
+  register: result
+  until: (result.status == 200)
+  retries: "{{ web_connection_retries }}"
+  delay: "{{ web_connection_delay }}"
 
 - name: Installing Fluentd
   shell: curl -L https://toolbelt.treasuredata.com/sh/install-ubuntu-trusty-td-agent3.sh | sh
-  when: is_fluentd == "true" or is_fluentd_server == "true"
 
 - include_tasks: config-fluentd.yml 
-  when: is_fluentd == "true"
 
 - name: copy configuration to fluentd_server
   copy:
@@ -42,11 +43,15 @@
     dest: /etc/td-agent/td-agent.conf
     owner: vagrant
     mode: 0644
-  when: is_fluentd_server == "true"
 
 - name: Ensure Fluentd is started
   service: 
     name: td-agent
     state: started
-  when: is_fluentd == "true" or is_fluentd_server == "true"
 
+- name: Check if port 24224 is listening
+  wait_for:
+    port: 24224
+    delay: 5
+    timeout: 30
+    msg: "Timeout waiting for 24224 to respond"

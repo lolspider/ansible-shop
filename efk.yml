@@ -4,15 +4,12 @@
     - role: geerlingguy.java
       vars:
         java_packages: openjdk-8-jdk
-      when: is_es == "true"
     - role: efk-fluentd
 
   pre_tasks:
     - name: installing repo for Java 8 in Ubuntu
       apt_repository: repo='ppa:openjdk-r/ppa'
-      when: is_es == "true"
 
     - name: apt-get update
       apt:
         update_cache: yes
-      when: is_es == "true"
