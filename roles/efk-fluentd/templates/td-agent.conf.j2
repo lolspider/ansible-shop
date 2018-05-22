@@ -15,7 +15,7 @@
       timestamp ${time}
     </record>
   </filter>
-  <match {{ dockertag }}>
+  <match **>
     @type forward
     <server>
       host {{ fluentd_server }}
