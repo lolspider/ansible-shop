@@ -2,6 +2,7 @@
   @type forward
   port 24224
   bind 0.0.0.0
+  source_address_key clientip
 </source>
 
 <match prod:**>
