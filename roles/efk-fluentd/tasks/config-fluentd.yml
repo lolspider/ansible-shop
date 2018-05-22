@@ -5,6 +5,10 @@
     dest: /etc/td-agent/td-agent.conf
     owner: vagrant
     mode: 0644
+  tags:
+    - fluentd
 
 - name: install elasticsearch output plugin
   shell: td-agent-gem install fluent-plugin-elasticsearch
+  tags:
+    - fluentd

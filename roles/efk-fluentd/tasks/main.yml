@@ -34,8 +34,12 @@
 
 - name: Installing Fluentd
   shell: curl -L https://toolbelt.treasuredata.com/sh/install-ubuntu-trusty-td-agent3.sh | sh
+  tags:
+    - fluentd
 
 - include_tasks: config-fluentd.yml 
+  tags:
+    - fluentd
 
 - name: copy configuration to fluentd_server
   copy:
@@ -48,6 +52,8 @@
   service: 
     name: td-agent
     state: started
+  tags:
+    - fluentd
 
 - name: Check if port 24224 is listening
   wait_for:
@@ -55,3 +61,5 @@
     delay: 5
     timeout: 30
     msg: "Timeout waiting for 24224 to respond"
+  tags:
+    - fluentd
