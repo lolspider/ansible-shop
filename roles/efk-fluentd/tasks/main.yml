@@ -1,8 +1,4 @@
 ---
-
-- name: Include variables
-  include_vars: Debian.yml
-
 - include_tasks: setup-elastic-repo.yml
 
 - name: Installing from the APT repository(install Elasticsearch)
@@ -37,7 +33,7 @@
   tags:
     - fluentd
 
-- include_tasks: config-fluentd.yml 
+- include_tasks: config-fluentd.yml
   tags:
     - fluentd
 
@@ -49,7 +45,7 @@
     mode: 0644
 
 - name: Ensure Fluentd is started
-  service: 
+  service:
     name: td-agent
     state: started
   tags:
@@ -59,7 +55,7 @@
   wait_for:
     port: 24224
     delay: 5
-    timeout: 30
+    timeout: 50
     msg: "Timeout waiting for 24224 to respond"
   tags:
     - fluentd
