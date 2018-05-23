@@ -13,12 +13,12 @@
     reserve_data true
     <parse>
       @type regexp
-      expression /^(?<logcontent>\w+\s\w+)/
+      expression /^(?<log>\w+\s\w+)/
     </parse>
   </filter>
   <filter>
     @type record_transformer
-    remove_keys source,container_id,log
+    remove_keys source,container_id
     <record>
       tag ${tag}
       timestamp ${time}
