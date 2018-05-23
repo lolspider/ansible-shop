@@ -8,7 +8,7 @@
         log_driver: fluentd
         log_options:
           fluentd-address: localhost:24224
-          tag: "{{ docker_tagenv }}:hello-docker-world"
+          tag: "{{ docker_tagenv }}:lolspider/hello-docker-world:{{ tagversion }}"
         ports:
           - "{{ guest_port }}:{{ host_port }}"
         state: started
