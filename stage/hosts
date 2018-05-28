@@ -1,5 +1,5 @@
 [stage_web]
-spring_boot ansible_host=192.168.34.110 ansible_ssh_private_key_file=ssh_keys/192.168.34.110.key
+spring_boot ansible_host=192.168.34.110 ansible_ssh_username=vagrant ansible_ssh_private_key_file=ssh_keys/192.168.34.110.key
 
 [stage_fluentd-client]
 spring_boot
