@@ -1,6 +1,6 @@
 ---
   - name: Import the Elastic PGP Key
-    apt_key: 
+    apt_key:
       url: https://artifacts.elastic.co/GPG-KEY-elasticsearch
       state: present
 
@@ -9,9 +9,21 @@
       name: apt-transport-https
       state: present
       update_cache: yes
-  
+
   - name: Installing from the APT repository(add repo)
     apt_repository:
       repo: deb https://artifacts.elastic.co/packages/6.x/apt stable main
       state: present
-  
+
+  - name: Installing from the APT repository(install Elasticsearch)
+    apt:
+      name: elasticsearch
+      state: present
+      update_cache: yes
+
+  - name: Check if port is listening
+    wait_for:
+      port: "{{ es_server_port }}"
+      delay: "{{ tcp_delay_time }}"
+      timeout: "{{ tcp_timeout }}"
+      msg: "Timeout waiting for  {{ es_server_port }} to respond"

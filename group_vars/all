@@ -1,8 +1,9 @@
 #def global var
-guest_port: 80
-host_port: 8080
+host_port: 80
+exposed_port: 8080
 web_connection_retries: 5
 web_connection_delay: 10
 spring_boot_version: latest
 tagversion: latest
 java_packages: openjdk-8-jdk
+user: vagrant

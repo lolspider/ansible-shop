@@ -1,0 +1,12 @@
+- name: Installing from the APT repository(install Kibana)
+  apt:
+    name: kibana
+    state: present
+
+- name: check if kibana {{ kibana_port }} can be access
+  uri:
+    url: http://{{ ansible_hostname }}:{{ kibana_port }}
+  register: result
+  until: (result.status == 200)
+  retries: "{{ web_connection_retries }}"
+  delay: "{{ web_connection_delay }}"

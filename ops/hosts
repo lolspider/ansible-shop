@@ -1,2 +1,2 @@
 jenkins_server ansible_host=192.168.34.112 ansible_ssh_private_key_file=ssh_keys/192.168.34.112.key
-log_server ansible_host=192.168.34.115 ansible_ssh_private_key_file=ssh_keys/192.168.34.115.key
+efk ansible_host=192.168.34.115 ansible_ssh_private_key_file=ssh_keys/192.168.34.115.key

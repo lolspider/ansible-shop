@@ -1,0 +1,21 @@
+# Receive data from port {{ fluentd_port }}
+<source>
+  @type forward
+  port {{ fluentd_port }}
+  bind 0.0.0.0
+  source_address_key clientip
+</source>
+
+#match tags and forward to elasticsearch
+<match {{ docker_tag }}>
+  @type elasticsearch
+  host {{ es_server }}
+  port {{ es_server_port }}
+  index_name {{ index_name }}
+</match>
+<match {{ docker_tag }}>
+  @type elasticsearch
+  host {{ es_server }}
+  port {{ es_server_port }}
+  index_name {{ index_name }}
+</match>

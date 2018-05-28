@@ -1,21 +1,28 @@
+
+# Receive data from port {{ fluentd_port }}
 <source>
   @type forward
-  @label @TEST
-  port 24224
+  @label @log_handler
+  port {{ fluentd_port }}
   bind 0.0.0.0
 </source>
 
+<label @log_handler>
 
-<label @TEST>
+  #reparse record log with expression,for example:
+  #old log:  {"log":"Hello World"}
+  #new log:  {"log":"Hello World"}
   <filter>
     @type parser
     key_name log
     reserve_data true
     <parse>
       @type regexp
-      expression /^(?<log>\w+\s\w+)/
+      expression {{ fluentd_parser }}
     </parse>
   </filter>
+
+  #remove unnecessary keys and add importment keys
   <filter>
     @type record_transformer
     remove_keys source,container_id
@@ -24,10 +31,18 @@
       timestamp ${time}
     </record>
   </filter>
+
+  #forward log
   <match **>
     @type forward
     <server>
+      name master
       host {{ fluentd_server }}
+    </server>
+    <server>
+      name backup
+      host {{ fluentd_server_bak | default(omit) }}
+      standby
     </server>
   </match>
 </label>

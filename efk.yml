@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: efk
   roles:
     - role: geerlingguy.java
       vars:
@@ -13,3 +13,8 @@
     - name: apt-get update
       apt:
         update_cache: yes
+
+
+- hosts: fluentd-client
+  roles:
+    - { role: efk-fluentd,tags: [ 'fluentd-client' ] }
