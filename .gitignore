@@ -2,3 +2,6 @@
 *.retry
 plugins/
 *.swp
+
+#vagrant
+.vagrant/

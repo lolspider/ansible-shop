@@ -1,21 +1,21 @@
 ---
-- hosts: all
-  roles:
-    - role: geerlingguy.docker
-    - role: geerlingguy.pip
-    - role: geerlingguy.java
-      vars:
-        java_packages: "{{ java_packages }}"
 
+- hosts: all
+  become: yes
+  roles:
+    - role: geerlingguy.pip
+    - role: geerlingguy.docker
   tasks:
     - name: Ensure denpendencies
       pip:
         name: docker-py
+    - name: Add the user 'vagrant' with a group of 'docker'
+      user:
+        name: vagrant
+        group: docker
 
-  pre_tasks:
-    - name: installing repo for Java 8 in Ubuntu
-      apt_repository: repo='ppa:openjdk-r/ppa'
-
-    - name: apt-get update
-      apt:
-        update_cache: yes
+- hosts: all
+  roles:
+    - role: ansiblebit.oracle-java
+      oracle_java_set_as_default: yes
+      oracle_java_version: 8
