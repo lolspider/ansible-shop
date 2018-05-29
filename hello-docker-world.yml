@@ -4,19 +4,19 @@
     - name: pull image
       docker_container:
         name: hello-docker-world
-        image: lolspider/hello-docker-world:{{ version }}
+        image: lolspider/hello-docker-world:{{ BUILD_ID }}
         log_driver: fluentd
         log_options:
           fluentd-address: localhost:24224
-          tag: "{{ docker_tag }}:lolspider/hello-docker-world:{{ version }}"
+          tag: "{{ docker_tag }}:lolspider/hello-docker-world:{{ BUILD_ID }}"
         ports:
-          - "{{ host_port }}:{{ exposed_port }}"
+          - "{{ hello_docker_world_port }}:8080"
         state: started
 
     - name: check if web can be access
       uri:
-        url: http://{{ ansible_hostname }}:{{ host_port }}
+        url: http://127.0.0.1:{{ hello_docker_world_port }}
       register: result
       until: (result.status == 200)
-      retries: "{{ web_connection_retries }}"
-      delay: "{{ web_connection_delay }}"
+      retries: "{{ hello_docker_world_web_connection_retries }}"
+      delay: "{{ hello_docker_world_web_connection_delay }}"

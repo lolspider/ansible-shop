@@ -1,9 +1,5 @@
 #def global var
-host_port: 80
-exposed_port: 8080
-web_connection_retries: 5
-web_connection_delay: 10
-spring_boot_version: latest
-tagversion: latest
-java_packages: openjdk-8-jdk
+hello_docker_world_port: 80
+hello_docker_world_port_web_connection_retries: 5
+hello_docker_world_port_web_connection_delay: 10
 user: vagrant
