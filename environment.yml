@@ -1,5 +1,4 @@
 ---
-
 - hosts: all
   become: yes
   roles:
@@ -14,8 +13,3 @@
         name: vagrant
         group: docker
 
-- hosts: all
-  roles:
-    - role: ansiblebit.oracle-java
-      oracle_java_set_as_default: yes
-      oracle_java_version: 8
