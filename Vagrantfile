@@ -1,8 +1,7 @@
 Vagrant.configure("2") do |config|
-  config.vm.box = "ubuntu/trusty64"
+  config.vm.box = "wvera/sles12sp1"
   config.vm.provider "virtualbox" do |v|
     v.memory = 1024
-
   end
   config.vm.box_check_update = false
 
@@ -33,5 +32,4 @@ Vagrant.configure("2") do |config|
     logserver.vm.network  :private_network, ip: "192.168.34.115"
     logserver.vm.network  :private_network, ip: "192.168.35.115"
   end
-
 end
