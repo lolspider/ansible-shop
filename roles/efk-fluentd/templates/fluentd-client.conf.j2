@@ -1,5 +1,3 @@
-
-# Receive data from port {{ fluentd_port }}
 <source>
   @type forward
   @label @log_handler
@@ -7,11 +5,12 @@
   bind 0.0.0.0
 </source>
 
+#Homework: buffer to file system
+# 1. make sure when fluentd client crash, all log can be found
+# 2. make sure when fluentd server crash, all log can be found
 <label @log_handler>
 
-  #reparse record log with expression,for example:
-  #old log:  {"log":"Hello World"}
-  #new log:  {"log":"Hello World"}
+  #reparse record log with expression
   <filter>
     @type parser
     key_name log
@@ -32,7 +31,8 @@
     </record>
   </filter>
 
-  #forward log
+  #forward log to efk
+  #make sure fluentd server HA
   <match **>
     @type forward
     <server>

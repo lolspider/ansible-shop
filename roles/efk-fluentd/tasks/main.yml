@@ -4,34 +4,25 @@
 
 - include_tasks: install-kibana.yml
 
-- name: Installing Fluentd
-  shell: curl -L https://toolbelt.treasuredata.com/sh/install-ubuntu-trusty-td-agent3.sh | sh
-  tags:
-    - fluentd-client
+- include_tasks: install-fluentd.yml
 
-- include_tasks: config-fluentd-client.yml
+- name: copy configuration to fluentd server
   tags:
-    - fluentd-client
-  when: fluentd_server is defined
-
-- name: copy configuration to fluentd_server
+    - fluentd-server
   template:
     src: td-agent.conf.server.j2
     dest: /etc/td-agent/td-agent.conf
     owner: "{{ user }}"
+  notify:
+    - restart fluentd
 
-- name: Ensure Fluentd is started
-  service:
-    name: td-agent
-    state: started
+- name: copy configuration to fluentd client
   tags:
     - fluentd-client
+  template:
+    src: td-agent.conf.j2
+    dest: /etc/td-agent/td-agent.conf
+    owner: "{{ user }}"
+  notify:
+    - restart fluentd
 
-- name: Check if port {{ fluentd_port }} is listening
-  wait_for:
-    port: "{{ fluentd_port }}"
-    delay: "{{ tcp_delay_time }}"
-    timeout: "{{ tcp_timeout }}"
-    msg: "Timeout waiting for {{ fluentd_port }} to respond"
-  tags:
-    - fluentd-client

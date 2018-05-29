@@ -16,5 +16,8 @@ kibana_port: 5601
 #fluend port configuration for client and server
 fluentd_port: 24224
 
-#fluentd parse expression in td-agent.conf
+#fluentd parse expression in td-agent.conf, default:
+#reparse record log with expression,for example:
+#old log:  {"log":"Hello World"}
+#new log:  {"log":"Hello World"}
 fluentd_parser: /^(?<log>\w+\s\w+)/
