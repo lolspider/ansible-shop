@@ -1,18 +1,4 @@
 ---
-#delay or retry for checking http status
-web_connection_delay: 10
-web_connection_retries: 5
-
-#delay or timeout for checking tcp ports
-tcp_delay_time: 5
-tcp_timeout: 30
-
-#for elasticsearch configuration
-es_server_port: 9200
-
-#kibana port
-kibana_port: 5601
-
 #fluend port configuration for client and server
 fluentd_port: 24224
 

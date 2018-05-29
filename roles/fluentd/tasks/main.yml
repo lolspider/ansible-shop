@@ -1,10 +1,7 @@
 ---
-
-- include_tasks: install-es.yml
-
-- include_tasks: install-kibana.yml
-
 - include_tasks: install-fluentd.yml
+  tags:
+    - fluentd
 
 - name: copy configuration to fluentd server
   tags:

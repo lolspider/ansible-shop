@@ -1,0 +1,6 @@
+---
+
+- include_tasks: install-es.yml
+
+- include_tasks: install-kibana.yml
+

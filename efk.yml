@@ -4,8 +4,10 @@
     - role: ansiblebit.oracle-java
       oracle_java_set_as_default: yes
       oracle_java_version: 8
-    - role: efk-fluentd
+    - role: es-kibana
+    - { role: fluentd, tags: [ 'fluentd', 'fluentd-server' ] }
+
 
 - hosts: fluentd-client
   roles:
-    - { role: efk-fluentd, tags: [ 'fluentd-client' ] }
+    - { role: fluentd, tags: [ 'fluentd', 'fluentd-client' ] }
