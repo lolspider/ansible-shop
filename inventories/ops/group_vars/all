@@ -1,0 +1,6 @@
+es_env_vars:
+  - tag: prod:**
+    index: prod-hello-docker-world
+
+  - tag: stage:**
+    index: stage-hello-docker-world

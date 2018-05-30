@@ -14,4 +14,4 @@
 - hosts: ~.*fluentd-client
   roles:
     - role: fluentd
-      fluentd_server: {{ fluentd-server }}
+      fluentd_server: 192.168.34.115

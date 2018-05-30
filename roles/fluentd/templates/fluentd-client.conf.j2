@@ -38,18 +38,12 @@
     <store>
       @type forward
       <server>
-        name master
         host {{ fluentd_server }}
-      </server>
-      <server>
-        name backup
-        host {{ fluentd_server_bak | default(omit) }}
-        standby
       </server>
     </store>
     <store>
       @type file
-      path /var/log/td-agent/${tag}
+      path /var/log/td-agent/
     </store>
   </match>
 </label>

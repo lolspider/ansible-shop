@@ -1,0 +1,5 @@
+#def global var
+hello_docker_world_port: 80
+hello_docker_world_port_web_connection_retries: 5
+hello_docker_world_port_web_connection_delay: 10
+user: vagrant
