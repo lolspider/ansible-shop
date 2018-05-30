@@ -6,6 +6,7 @@
     src: fluentd-server.conf.j2
     dest: /etc/td-agent/td-agent.conf
     owner: "{{ user }}"
+  become: yes
   notify:
     - restart fluentd
   when: es_server is defined
@@ -15,6 +16,7 @@
     src: fluentd-client.conf.j2
     dest: /etc/td-agent/td-agent.conf
     owner: "{{ user }}"
+  become: yes
   notify:
     - restart fluentd
   when: fluentd_server is defined

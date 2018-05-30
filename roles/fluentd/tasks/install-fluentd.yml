@@ -4,5 +4,7 @@
 
 - name: install elasticsearch output plugin
   shell: td-agent-gem install fluent-plugin-elasticsearch
+  become: yes
   notify:
     - restart fluentd
+  when: es_server is defined

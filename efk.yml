@@ -8,8 +8,10 @@
     - role: es-kibana
       become: yes
     - role: fluentd
-      become: yes
+      es_server: localhost
 
-- hosts: fluentd-client
+
+- hosts: ~.*fluentd-client
   roles:
-    - fluentd
+    - role: fluentd
+      fluentd_server: {{ fluentd-server }}

@@ -3,8 +3,9 @@
   service:
     name: td-agent
     state: restarted
+  become: yes
 
-- name: Check if port {{ fluentd_port }} is listening
+- name: Check if fluentd port is listening
   listen: restart fluentd
   wait_for:
     port: "{{ fluentd_port }}"
