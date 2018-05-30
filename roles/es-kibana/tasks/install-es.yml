@@ -3,23 +3,35 @@
   apt_key:
     url: https://artifacts.elastic.co/GPG-KEY-elasticsearch
     state: present
+  become: yes
 
 - name: Installing from the APT repository(install apt-transport-https)
   apt:
-    name: apt-transport-https
+    name:
+      - apt-transport-https
     state: present
-    update_cache: yes
+  become: yes
 
 - name: Installing from the APT repository(add repo)
   apt_repository:
-    repo: deb https://artifacts.elastic.co/packages/6.x/apt stable main
+    repo: 'deb https://artifacts.elastic.co/packages/6.x/apt stable main'
+    filename: elastic-6.x
     state: present
+  become: yes
 
 - name: Installing from the APT repository(install Elasticsearch)
   apt:
     name: elasticsearch
     state: present
     update_cache: yes
+  become: yes
+
+- name: Start service elasticsearch, if not running
+  service:
+    name: elasticsearch
+    state: started
+    enabled: yes
+  become: yes
 
 - name: Check if port is listening
   wait_for:

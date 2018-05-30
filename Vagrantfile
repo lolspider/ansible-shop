@@ -4,6 +4,7 @@ Vagrant.configure("2") do |config|
     v.memory = 1024
   end
   config.vm.box_check_update = false
+  config.ssh.insert_key = false
 
   config.vm.provision "ansible" do |ansible|
     ansible.playbook = "environment.yml"

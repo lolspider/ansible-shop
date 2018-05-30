@@ -2,6 +2,13 @@
   apt:
     name: kibana
     state: present
+  become: yes
+
+- name: Start service kibana, if not running
+  service:
+    name: kibana
+    state: started
+    enabled: yes
 
 - name: check if kibana {{ kibana_port }} can be access
   uri:
