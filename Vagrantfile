@@ -1,5 +1,5 @@
 Vagrant.configure("2") do |config|
-  config.vm.box = "wvera/sles12sp1"
+  config.vm.box = "ubuntu/trusty64"
   config.vm.provider "virtualbox" do |v|
     v.memory = 1024
   end

@@ -7,15 +7,11 @@
 </source>
 
 #match tags and forward to elasticsearch
-<match {{ docker_tag }}>
+{% for var in es_env_vars %}
+<match {{ var.tag }}>
   @type elasticsearch
   host {{ es_server }}
   port {{ es_server_port }}
-  index_name {{ index_name }}
+  index_name {{ var.index }}
 </match>
-<match {{ docker_tag }}>
-  @type elasticsearch
-  host {{ es_server }}
-  port {{ es_server_port }}
-  index_name {{ index_name }}
-</match>
+{% endfor %}
