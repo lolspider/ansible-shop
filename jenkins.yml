@@ -5,3 +5,4 @@
       oracle_java_set_as_default: yes
       oracle_java_version: 8
     - role: geerlingguy.jenkins
+  become: yes
