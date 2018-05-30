@@ -11,7 +11,9 @@
       es_server: localhost
 
 
-- hosts: ~.*fluentd-client
+- hosts: fluentd-client
+  pre_tasks:
+    - set_fact:
+        fluentd_server: '{{ fluentd_server }}'
   roles:
     - role: fluentd
-      fluentd_server: 192.168.34.115

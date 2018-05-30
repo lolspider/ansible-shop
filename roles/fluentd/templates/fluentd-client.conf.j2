@@ -21,7 +21,7 @@
     </parse>
   </filter>
 
-  #remove unnecessary keys and add importment keys
+  #remove unnecessary keys and add importent keys
   <filter>
     @type record_transformer
     remove_keys source,container_id
@@ -43,7 +43,7 @@
     </store>
     <store>
       @type file
-      path /var/log/td-agent/
+      path /var/log/td-agent/{{ fluentd_client_log_basename }}
     </store>
   </match>
 </label>
