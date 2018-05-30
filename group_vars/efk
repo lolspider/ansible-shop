@@ -1,3 +1,0 @@
-es_server: 192.168.35.115
-index_name: prod-hello-docker-world
-docker_tag: “prod:**”

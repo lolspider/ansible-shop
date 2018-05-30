@@ -4,10 +4,12 @@
     - role: ansiblebit.oracle-java
       oracle_java_set_as_default: yes
       oracle_java_version: 8
+      become: yes
     - role: es-kibana
-    - { role: fluentd, tags: [ 'fluentd', 'fluentd-server' ] }
-
+      become: yes
+    - role: fluentd
+      become: yes
 
 - hosts: fluentd-client
   roles:
-    - { role: fluentd, tags: [ 'fluentd', 'fluentd-client' ] }
+    - fluentd

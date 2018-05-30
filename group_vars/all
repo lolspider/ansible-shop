@@ -10,4 +10,4 @@ es_env_vars:
     index: prod-hello-docker-world
 
   - tag: stage:**
-    index: stage
+    index: stage-hello-docker-world

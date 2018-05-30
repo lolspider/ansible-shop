@@ -1,25 +1,20 @@
 ---
 - include_tasks: install-fluentd.yml
-  tags:
-    - fluentd
 
 - name: copy configuration to fluentd server
-  tags:
-    - fluentd-server
   template:
-    src: td-agent.conf.server.j2
+    src: fluentd-server.conf.j2
     dest: /etc/td-agent/td-agent.conf
     owner: "{{ user }}"
   notify:
     - restart fluentd
+  when: es_server is defined
 
 - name: copy configuration to fluentd client
-  tags:
-    - fluentd-client
   template:
-    src: td-agent.conf.j2
+    src: fluentd-client.conf.j2
     dest: /etc/td-agent/td-agent.conf
     owner: "{{ user }}"
   notify:
     - restart fluentd
-
+  when: fluentd_server is defined

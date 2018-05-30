@@ -10,7 +10,7 @@
 {% for var in es_env_vars %}
 <match {{ var.tag }}>
   @type elasticsearch
-  host {{ es_server }}
+  host {{ es_server | default('localhost') }}
   port {{ es_server_port }}
   index_name {{ var.index }}
 </match>

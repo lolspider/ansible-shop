@@ -12,7 +12,7 @@
 
 - name: check if kibana {{ kibana_port }} can be access
   uri:
-    url: http://{{ ansible_hostname }}:{{ kibana_port }}
+    url: http://127.0.0.1:{{ kibana_port }}
   register: result
   until: (result.status == 200)
   retries: "{{ web_connection_retries }}"

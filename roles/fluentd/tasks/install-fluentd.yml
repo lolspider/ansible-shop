@@ -6,11 +6,3 @@
   shell: td-agent-gem install fluent-plugin-elasticsearch
   notify:
     - restart fluentd
-
-# homework: move to handler
-- name: Check if port {{ fluentd_port }} is listening
-  wait_for:
-    port: "{{ fluentd_port }}"
-    delay: "{{ tcp_delay_time }}"
-    timeout: "{{ tcp_timeout }}"
-    msg: "Timeout waiting for {{ fluentd_port }} to respond"

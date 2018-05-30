@@ -34,15 +34,22 @@
   #forward log to efk
   #make sure fluentd server HA
   <match **>
-    @type forward
-    <server>
-      name master
-      host {{ fluentd_server }}
-    </server>
-    <server>
-      name backup
-      host {{ fluentd_server_bak | default(omit) }}
-      standby
-    </server>
+    @type copy
+    <store>
+      @type forward
+      <server>
+        name master
+        host {{ fluentd_server }}
+      </server>
+      <server>
+        name backup
+        host {{ fluentd_server_bak | default(omit) }}
+        standby
+      </server>
+    </store>
+    <store>
+      @type file
+      path /var/log/td-agent/${tag}
+    </store>
   </match>
 </label>
