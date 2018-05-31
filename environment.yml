@@ -31,3 +31,20 @@
     - name: make && make install
       shell: 'cd /tmp/git-crypt/checkout; make && make install'
  
+
+- hosts: jenkins_server
+  become: yes
+  tags: ansible
+  tasks:
+    - name: install dependencies software-properties-common
+      apt: 
+        name: software-properties-common
+        state: present
+    - name: add repo
+      apt_repository:
+        repo: ppa:ansible/ansible
+        state: present 
+    - name: install ansible
+      apt: 
+        name: ansible
+        state: present 
