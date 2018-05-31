@@ -12,4 +12,9 @@
         - GitHub
         - Git
         - ansible
+  tasks:
+    - name: Add the user 'jenkins' with a group of 'docker'
+      user:
+        name: jenkins
+        group: docker
   become: yes
