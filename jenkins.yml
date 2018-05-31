@@ -5,4 +5,11 @@
       oracle_java_set_as_default: yes
       oracle_java_version: 8
     - role: geerlingguy.jenkins
+      jenkins_plugins:
+        - Pipeline
+        - "Docker Pipeline"
+        - "Pipeline: Stage View"
+        - GitHub
+        - Git
+        - ansible
   become: yes

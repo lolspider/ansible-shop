@@ -12,3 +12,22 @@
       user:
         name: vagrant
         group: docker
+
+- hosts: jenkins_server
+  become: yes
+  tags: git-crypt
+  tasks:
+    - name: Ensure dependenies is installed
+      apt:
+        name:
+          - make 
+          - g++
+          - libssl-dev
+        state: present
+    - name: clone git-crypt
+      git: 
+        repo: 'https://github.com/AGWA/git-crypt.git'
+        dest: /tmp/git-crypt/checkout
+    - name: make && make install
+      shell: 'cd /tmp/git-crypt/checkout; make && make install'
+ 
