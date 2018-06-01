@@ -38,8 +38,16 @@
     <store>
       @type forward
       <server>
+        name master
         host {{ fluentd_server }}
       </server>
+   {% if fluentd_server_bak is defined %}
+      <server>
+        name backup
+        host {{ fluentd_server_bak }}
+        standby
+      </server>
+    {% endif %}
     </store>
     <store>
       @type file
