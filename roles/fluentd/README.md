@@ -1,10 +1,10 @@
 ##### fluend port configuration for client and server
   >fluentd_port: 24224
 
-#####fluentd parse expression in td-agent.conf, default:
-#####reparse record log with expression,for example:
-#####old log:  {"log":"Hello World"}
-#####new log:  {"log":"Hello World"}
+#####fluentd parse expression in td-agent.conf, default:  
+#####reparse record log with expression,for example:  
+#####old log:  {"log":"Hello World"}  
+#####new log:  {"log":"Hello World"}  
   >fluentd_parser: /^(?<log>\w+\s\w+)/
 
 #####delay or timeout for checking tcp ports
