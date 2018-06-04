@@ -2,7 +2,7 @@
 
 
 ##### delay or retry for checking http status
-  >kibana_web_connection_delay: 10
+  >kibana_web_connection_delay: 10 
   >kibana_web_connection_retries: 5
 
 ##### delay or timeout for checking tcp ports
