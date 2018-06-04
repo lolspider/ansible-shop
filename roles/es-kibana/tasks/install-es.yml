@@ -36,6 +36,6 @@
 - name: Check if port is listening
   wait_for:
     port: "{{ es_server_port }}"
-    delay: "{{ tcp_delay_time }}"
-    timeout: "{{ tcp_timeout }}"
+    delay: "{{ es_tcp_delay_time }}"
+    timeout: "{{ es_tcp_timeout }}"
     msg: "Timeout waiting for  {{ es_server_port }} to respond"

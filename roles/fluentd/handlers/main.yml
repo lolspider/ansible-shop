@@ -9,6 +9,6 @@
   listen: restart fluentd
   wait_for:
     port: "{{ fluentd_port }}"
-    delay: "{{ tcp_delay_time }}"
-    timeout: "{{ tcp_timeout }}"
+    delay: "{{ fluentd_tcp_delay_time }}"
+    timeout: "{{ fluentd_tcp_timeout }}"
     msg: "Timeout waiting for {{ fluentd_port }} to respond"

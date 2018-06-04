@@ -9,5 +9,5 @@ fluentd_port: 24224
 fluentd_parser: /^(?<log>\w+\s\w+)/
 
 #delay or timeout for checking tcp ports
-tcp_delay_time: 5
-tcp_timeout: 30
+fluentd_tcp_delay_time: 5
+fluentd_tcp_timeout: 30

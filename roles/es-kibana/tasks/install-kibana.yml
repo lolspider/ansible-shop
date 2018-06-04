@@ -15,5 +15,5 @@
     url: http://127.0.0.1:{{ kibana_port }}
   register: result
   until: (result.status == 200)
-  retries: "{{ web_connection_retries }}"
-  delay: "{{ web_connection_delay }}"
+  retries: "{{ kibana_web_connection_retries }}"
+  delay: "{{ kibana_web_connection_delay }}"
