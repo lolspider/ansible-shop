@@ -1,6 +1,8 @@
 es_env_vars:
-  - tag: prod:**
+  - tag: prod**hello-docker-world**
     index: prod-hello-docker-world
 
-  - tag: stage:**
-    index: stage-hello-docker-world
+  - tag: staging**hello-docker-world**
+    index: staging-hello-docker-world
+
+user: vagrant
