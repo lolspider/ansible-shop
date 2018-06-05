@@ -1,0 +1,7 @@
+FROM jenkins/jenkins:lts
+
+#Install plugin if necessary
+{% if jenkins_plugins|length > 0 %}
+RUN /usr/local/bin/install-plugins.sh {% for plugin in jenkins_plugins %}{{ plugin }} {% endfor %}
+{% endif %}
+

@@ -1,0 +1,12 @@
+---
+- hosts: jenkins_server
+  roles:
+    - jenkins-in-docker
+  vars:
+    jenkins_plugins:
+      - pipeline-build-step
+      - ansible
+      - git 
+      - github
+      - docker-build-step
+      - pipeline-stage-view

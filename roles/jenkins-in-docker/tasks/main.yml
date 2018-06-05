@@ -1,0 +1,54 @@
+---
+- name: copy Dockerfile
+  template:
+    src: Dockerfile.j2
+    dest: /tmp/Dockerfile
+    owner: "{{ user }}"
+
+- name: rm image if exists
+  docker_image:
+    name: jenkins
+    tag: customized
+    state: absent
+    force: yes
+
+- name: build jenkins image
+  docker_image:
+    path: /tmp/
+    name: jenkins
+    tag: customized
+  become: yes
+
+- name: create directory
+  file:
+    path: "{{ jenkins_home }}/init.groovy.d"
+    state: directory
+    recurse: yes
+    owner: "{{ user }}"
+  become: yes
+
+- name: configure default users
+  template:
+    src: basic-security.groovy
+    dest: "{{ jenkins_home }}/init.groovy.d/basic-security.groovy"
+    owner: "{{ user }}"
+    mode: 0775
+  become: yes
+
+- name: run Jenkins container
+  docker_container:
+    name: jenkins
+    image: jenkins:customized
+    volumes:
+      - "{{ jenkins_home }}:/var/jenkins_home"
+    env:
+      JAVA_OPTS: "{{ jenkins_java_options }}"
+    ports:
+      - "{{ jenkins_http_port }}:8080"
+
+- name: Wait for Jenkins to start up before proceeding.
+  shell: "curl -D - --silent --max-time 5 http://127.0.0.1:{{ jenkins_http_port }}"
+  register: result
+  until: (result.stdout.find("403 Forbidden") != -1) or (result.stdout.find("200 OK") != -1) and (result.stdout.find("Please wait while") == -1)
+  retries: "{{ jenkins_connection_retries }}"
+  delay: "{{ jenkins_connection_delay }}"
