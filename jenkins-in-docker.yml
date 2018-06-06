@@ -10,3 +10,4 @@
       - github
       - docker-build-step
       - pipeline-stage-view
+      - pipeline-model-declarative-agent
