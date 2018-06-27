@@ -1,0 +1,18 @@
+---
+- name: create mongodb data vg
+  lvg: vg=mongodatavg pvs={{ mongodb_diskdev }} state=present
+- name: create mongodb data lv
+  lvol: vg=mongodatavg lv=mongodblv01 size=+100%FREE
+- name: mkfs to xfs
+  filesystem: fstype=xfs dev=/dev/mapper/mongodatavg-mongodblv01
+- name: get dev uuid
+  shell: blkid -s UUID -o value /dev/mapper/mongodatavg-mongodblv01
+  register: dev_uuid
+- name: add fs to fstab
+  mount: path={{ mongodb_volpath }} src="UUID={{ dev_uuid }}" fstype=xfs opts=noatime state=present
+- name: mount mongodb dir
+  mount: path={{ mongodb_volpath }} src="UUID={{ dev_uuid }}" fstype=xfs opts=noatime state=mounted
+- name: setting readahead to 0 for SSD disk type
+  shell: lvchange -r 0 /dev/mapper/mongodatavg-mongodblv01
+  when: ssd_disk_type
+  ignore_errors: yes

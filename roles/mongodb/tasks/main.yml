@@ -1,0 +1,52 @@
+
+- include: create_dbpath.yml
+  when: create_dbpath
+
+- name: configuring swap
+  sysctl: name=vm.swappiness value=1 state=present
+- name: fix Azure load balancer tcp idle timeout
+  sysctl: name=net.ipv4.tcp_keepalive_time value=120 state=present
+- name: disable the Transparent Huge Pages
+  copy: src=disable-transparent-hugepages dest=/etc/init.d/disable-transparent-hugepages mode="a+x"
+- name: made the disable-transparent-hugepages when startup
+  shell: insserv /etc/init.d/disable-transparent-hugepages
+- name: running disable-transparent-hugepages
+  shell: /etc/init.d/disable-transparent-hugepages start
+- name: configuring NUMA on Linux
+  sysctl: name=vm.zone_reclaim_mode value=0 state=present
+- name: install the numactl package
+  zypper: name=numactl state=present disable_gpg_check=yes
+- name: add the mongodb repo
+  zypper_repository: name=mongodb repo='https://repo.mongodb.org/zypper/suse/12/mongodb-org/3.6/x86_64/' auto_import_keys=yes  disable_gpg_check=yes
+- name: install the mongodb package
+  zypper: name={{ item }}-{{ mongodb_version }} state=present disable_gpg_check=yes
+  with_items:
+    - mongodb-org
+    - mongodb-org-server
+    - mongodb-org-shell
+    - mongodb-org-tools
+    - mongodb-org-mongos
+- name: lock mongodb version
+  shell: zypper addlock {{ item }}-{{ mongodb_version }}
+  with_items:
+    - mongodb-org
+    - mongodb-org-server
+    - mongodb-org-shell
+    - mongodb-org-tools
+    - mongodb-org-mongos
+- name: setting the mongodb
+  template: src=mongod.conf.j2 dest=/etc/mongod.conf
+- name: setting the numactl startup mongodb
+  template: src=mongod.service.j2 dest=/lib/systemd/system/mongod.service
+- name: ensure mongodb path
+  file: path={{ mongodb_volpath }}/mongodata state=directory owner=mongod group=mongod
+- name: delete files if exist
+  file: path={{ item }} state=absent
+  with_items:
+    - "/var/run/mongodb/mongod.pid"
+    - "/tmp/mongodb-27017.sock"
+- name: startup mongodb
+  systemd: name=mongod state=started daemon_reload=yes enabled=True
+
+
+

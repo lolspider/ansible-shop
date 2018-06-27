@@ -1,0 +1,6 @@
+---
+mongodb_version: 3.6.5
+mongodb_volpath: /data1
+mongodb_diskdev: /dev/sde
+create_dbpath: false
+ssd_disk_type: true
